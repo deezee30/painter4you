@@ -1,0 +1,219 @@
+/*
+ * General modifications
+ */
+
+body {
+    background: #d9effa url('../img/wave2.jpg') no-repeat fixed center top;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.section {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.header {
+    display: block;
+    margin: auto;
+    background-color: white;
+    max-height: 100px;
+}
+
+/*
+ * Content separators
+ */
+
+.vertical {
+    margin-top: 25px;
+    height: 100%;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    -webkit-border-image:
+            -webkit-gradient(linear, 0 0, 0 100%, from(black), to(rgba(0, 0, 0, 0))) 1 100%;
+    -webkit-border-image:
+            -webkit-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image:
+            -moz-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+    -o-border-image:
+            -o-linear-gradient(black, rgba(0, 0, 0, 0)) 1 100%;
+    border-image:
+            linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) 1 100%;
+}
+
+hr.separator {
+    border-width: 0 0 1px 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/*
+ * Top carousel (gallery1)
+ */
+
+.carousel-inner {
+    max-width: 2000px;
+    max-height: 700px;
+}
+
+.carousel-inner .item {
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#top {
+    border-bottom: 5px solid white;
+}
+
+/*
+ * Page carousel (gallery2)
+ */
+
+#gallery2 {
+    border: 2px solid #525C7A;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.hide-bullets {
+    list-style: none;
+    margin-left: -40px;
+    margin-top: 20px;
+}
+
+.thumbnail {
+    padding: 0;
+    transition: all 0.2s ease;
+    border: 2px solid white;
+}
+
+.thumbnail:hover {
+    border: 2px solid #525C7A;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+
+.hide-bullets .col-sm-3 {
+    padding: 0 5px 0 5px;
+}
+
+/*
+ * Content modules
+ */
+
+.well-sm {
+    background-color: rgba(222, 222, 222, 0.5);
+	margin-top: 10px;
+}
+
+.well-sm ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.well-sm li {
+    padding-left: 1em;
+    text-indent: -.7em;
+}
+
+.well-sm li:before {
+    content: "✓ ";
+    color: green;
+}
+
+.jumbotron {
+    padding: 15px;
+}
+
+/*
+ * Alerts
+ */
+
+.alert {
+    margin-top: -80px;
+    position: fixed;
+    z-index: 99999;
+    width: 75%;
+    max-width: 1300px;
+}
+
+.alert a {
+    padding-left: 35px;
+}
+
+/*
+ * Contact Info Box
+ */
+
+.box {
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease;
+    border: 2px dashed #dadada;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-clip: padding-box;
+    padding: 10px 0 10px 0;
+    min-height: 50px;
+}
+
+.box:hover {
+    border: 2px solid #525C7A;
+}
+
+.box span.box-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.box .box-content {
+    padding: 8px;
+    border-radius: 0 0 2px 2px;
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+.box .box-content p {
+    color: #515c66;
+    text-transform: none;
+}
+
+/*
+ * A Bootstrap 3.1 affix sidebar
+ * template from http://bootply.com
+ */
+
+.affix-top,.affix {
+    position: static;
+}
+
+@media (min-width: 979px) {
+    #sidebar.affix-top {
+        position: static;
+        margin-top: 70px;
+        width: 150px;
+    }
+
+    #sidebar.affix {
+        position: fixed;
+        top: 90px;
+        width: 150px;
+    }
+}
+
+#sidebar li.active {
+    border: 0 #eee solid;
+    border-right-width: 5px;
+}
+
+#sidebar li span {
+    color: #34495e;
+}
