@@ -6,9 +6,9 @@
 
 return [
 
-    // Whether or not to output the debuggings of the website
-    // for developmental and non-production environments.
-    "debug" => true,
+    // For developmental purposes. Enables debugging and
+    // prevents caching. Do not use in production environment.
+    "dev" => true,
 
     // Alert message to display on the top of the website.
     // Leave blank to display no message.
@@ -30,9 +30,33 @@ return [
 
         // The email to display on the website and send the
         // inquiries and contact forms to.
-        "email" => "contact@painter4you.ie",
+        "email" => "contact@painter4you.com",
 
         // The phone number to display on the website as a contact method.
         "phone" => "085 154 8215"
+    ],
+
+    /*
+     * Media settings
+     */
+    "media" => [
+
+        // Rotating carousel at the top of the website
+        // Standard image resolutions are 2000x700 pixels.
+        "top" => [
+            [
+                "path" => "img/1/1.jpg",
+                "title" => "Top Quality Painting & Decorating Contractor",
+                "caption" => "Experienced in all areas of home and property decorating with over twenty years experience in the decorating business"
+            ], [
+                "path" => "//placehold.it/2000x700",
+                "title" => "...",
+                "caption" => "..."
+            ], [
+                "path" => "//placehold.it/2000x700",
+                "title" => "...",
+                "caption" => "..."
+            ]
+        ]
     ]
 ];

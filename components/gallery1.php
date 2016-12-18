@@ -1,34 +1,36 @@
 <div id="top" class="carousel slide" data-ride="carousel">
+
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#top" data-slide-to="0" class="active"></li>
-        <li data-target="#top" data-slide-to="1"></li>
-        <li data-target="#top" data-slide-to="2"></li>
+        <?php
+        $x = 0;
+        while ($x < count($media_top)) {
+            echo "<li data-target='#top' data-slide-to='$x'".($x == 0 ? " class='active'" : "")."></li>";
+            $x++;
+        }
+        ?>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="../img/1/1.jpg" alt="1" />
-            <div class="carousel-caption">
-                <h3>Top Quality Painting & Decorating Contractor</h3>
-                <p>Experienced in all areas of home and property decorating with over twenty years experience in the decorating business.</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="//placehold.it/2000x700" alt="2" />
-            <div class="carousel-caption">
-                <h3>...</h3>
-                <p>...</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="//placehold.it/2000x700" alt="3" />
-            <div class="carousel-caption">
-                <h3>...</h3>
-                <p>...</p>
-            </div>
-        </div>
+        <?php
+        $x = 0;
+        foreach ($media_top as $item) {
+            $path       = $item["path"] . $key;
+            $title      = $item["title"];
+            $caption    = $item["caption"];
+            $active     = $x == 0 ? " active" : "";
+
+            echo "<div class='item$active'>";
+            echo    "<img src='$path' />";
+            echo    "<div class='carousel-caption'>";
+            echo        "<h3>$title</h3>";
+            echo        "<p>$caption</p>";
+            echo    "</div>";
+            echo "</div>";
+            $x++;
+        }
+        ?>
     </div>
 
     <!-- Controls -->

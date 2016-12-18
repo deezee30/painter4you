@@ -84,6 +84,10 @@ hr.separator {
     margin-top: 20px;
 }
 
+.hide-bullets .col-xs-3 {
+    padding: 0 5px 0 5px;
+}
+
 .thumbnail {
     padding: 0;
     transition: all 0.2s ease;
@@ -96,10 +100,6 @@ hr.separator {
 
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     width: 100%;
-}
-
-.hide-bullets .col-sm-3 {
-    padding: 0 5px 0 5px;
 }
 
 /*

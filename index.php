@@ -4,15 +4,20 @@
 $then = microtime(true);
 
 // obtain configuration values from config.php
-$config         = require("config.php");
-$debug          = $config["debug"];
-$alertmsg       = $config["alert"];
-$logo           = $config["logo"];
-$alert          = isset($alertmsg) && strlen($alertmsg) > 0;
-$contactEnabled = $config["contact"]["enabled"];
-$contactEmail   = $config["contact"]["email"];
-$contactPhone   = $config["contact"]["phone"];
+$config             = require("config.php");
+$dev                = $config["dev"];
+$alert_msg          = $config["alert"];
+$logo               = $config["logo"];
+$alert              = isset($alertmsg) && strlen($alertmsg) > 0;
+$contact_enabled    = $config["contact"]["enabled"];
+$contact_email      = $config["contact"]["email"];
+$contact_phone      = $config["contact"]["phone"];
+$media_top          = $config["media"]["top"];
 
+// unique key to prevent caching
+$key = $dev ? "?$then" : "";
+
+// handle cookies and form submition
 $submit = false;
 $cookies = false;
 $reset = false;
@@ -22,7 +27,7 @@ if (isset($_GET["reset"])) {
     $reset = true;
 }
 
-if ($contactEnabled && isset($_POST["name"])) {
+if ($contact_enabled && isset($_POST["name"])) {
 
     $name = $_POST["name"];
     $phone = $_POST["phone"];
@@ -30,7 +35,7 @@ if ($contactEnabled && isset($_POST["name"])) {
     $description = wordwrap($_POST["description"], 100, "\r\n");
 
     if (!isset($_COOKIE["submitted"])) {
-        // Compose Mail
+        // compose mail
         $headers = "MIME-Version: 1.0rn\r\nContent-type: text/html; charset=iso-8859-1rn\r\nFrom: $name";
         // options to send to cc+bcc
         // $headers .= "Cc: [email]email@test.com[/email]";
@@ -49,10 +54,10 @@ if ($contactEnabled && isset($_POST["name"])) {
         <b>Description:</b><br /> <?php echo $description ?>
         <hr>
         <b>Date of creation:</b> <?php echo date('l jS \of F Y \a\t h:i:s A') ?><br />
-        <b>Applicant's IP:</b> <?php echo getIp() ?>
+        <b>Applicant's IP:</b> <?php echo get_ip() ?>
         <?php
 
-        mail($contactEmail, $header, ob_get_clean(), $headers);
+        mail($contact_email, $header, ob_get_clean(), $headers);
 
         setcookie("submitted", true, time() + 3600);
     } else {
@@ -62,7 +67,7 @@ if ($contactEnabled && isset($_POST["name"])) {
     $submit = true;
 }
 
-function getIp() {
+function get_ip() {
     if (!empty($_SERVER['HTTP_CLIENT_IP']))
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -79,8 +84,8 @@ function getIp() {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Paul's affordable and high quality painting and decorating services are offered here." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Paul's affordable and high quality painting and decorating services are offered here" />
         <meta name="keywords" content="galway, paint, painter, painting, decorator, decorating, cheap, affordable, high, quality, fast, efficient, gatis, pauls, paul, painterforyou">
 
         <!-- Favicon -->
@@ -91,7 +96,7 @@ function getIp() {
 		<!-- Blueimp gallery CSS -->
 		<link rel="stylesheet" href="css/blueimp-gallery.min.css" />
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="css/custom.css" />
+        <link rel="stylesheet" href="css/custom.css<?php echo $key ?>" />
 
         <title>Painter For You!</title>
     </head>
@@ -105,7 +110,7 @@ function getIp() {
 
                         <!-- left -->
                         <div class="col-sm-8">
-                            <a href="//painterforyou.net">
+                            <a href="//painter4you.com">
                                 <img height=100px src="img/<?php echo $config['logo'] ?>" />
                             </a>
                         </div>
@@ -115,9 +120,9 @@ function getIp() {
                         <div class="box col-sm-3" style="margin-top: 15px">
                             <dl class="dl-horizontal" style="margin: 5px 0 0 -100px">
                                 <dt>Phone</dt>
-                                <?php echo "<dd>$contactPhone</dd>" ?>
+                                <?php echo "<dd>$contact_phone</dd>" ?>
                                 <dt>Email</dt>
-                                <?php echo "<dd><a href='mailto:$contactEmail'>$contactEmail</a></dd>" ?>
+                                <?php echo "<dd><a href='mailto:$contact_email'>$contact_email</a></dd>" ?>
                             </dl>
                         </div>
                         <!-- /right -->
@@ -201,8 +206,8 @@ function getIp() {
                                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <b>Email</b>
                                             </div>
                                             <div class="col-md-5" style="text-align: left">
-                                                <?php echo $contactPhone ?><br />
-                                                <b><a href="mailto:<?php echo $contactEmail ?>"><?php echo $contactEmail ?></a></b>
+                                                <?php echo $contact_phone ?><br />
+                                                <b><a href="mailto:<?php echo $contact_email ?>"><?php echo $contact_email ?></a></b>
                                             </div>
                                         </div>
                                         <hr class="separator" />
@@ -223,15 +228,19 @@ function getIp() {
                 <hr class="separator" />
                 <div class="row">
                     <div class="col-lg-8">
-                        <?php echo "<p>© Copyright - Painter4You.ie Ireland | PHONE: $contactPhone | EMAIL: <b><a href='mailto:$contactEmail'>$contactEmail</a></b></p>" ?>
+                        <?php echo "<p>© Copyright - Painter4You.ie Ireland | PHONE: $contact_phone | EMAIL: <b><a href='mailto:$contact_email'>$contact_email</a></b></p>" ?>
                     </div>
 
                     <?php
                     // output the time taken to load the page if debugging is enabled
-                    if ($debug) {
+                    if ($dev) {
                         $now = microtime(true);
                         $load = round(($now - $then) * 1000);
-                        echo "<div class=\"col-lg-4\"><small class=\"pull-right\"><em>Page loaded in $load ms</em></small></div>";
+                        echo "<div class='col-xs-4'>";
+                        echo    "<small class='pull-right'>";
+                        echo        "<em>Page loaded in $load ms</em>";
+                        echo    "</small>";
+                        echo "</div>";
                     }
                     ?>
 

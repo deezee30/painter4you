@@ -6,21 +6,21 @@ if ($reset) {
     if ($cookies) {
         echo buildAlert("danger", "remove-sign", "You have already sent your contact form. You may do this again in 24 hours!");
     } else {
-        if (!$contactEnabled) {
+        if (!$contact_enabled) {
             echo buildAlert("danger", "remove-sign", "The contact form is currently disabled. Please contact me in some other fashion!");
         } else {
             echo buildAlert("success", "ok-sign", "Thanks for contacting, I will get back to you shortly!");
         }
     }
 } else if ($alert) {
-    echo buildAlert("info", "exclamation-sign", $alertmsg);
+    echo buildAlert("info", "exclamation-sign", $alert_msg);
 }
 
-function buildAlert($alertType = "info", $alertGlyphicon = "info-sign", $alertMsg) {
+function buildAlert($type = "info", $glyphicon = "info-sign", $msg) {
     return "<div class=\"container\">
-                <div class=\"alert alert-$alertType fade in\" role=\"alert\">
+                <div class=\"alert alert-$type fade in\" role=\"alert\">
                     <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                    <span class=\"glyphicon glyphicon-$alertGlyphicon\" aria-hidden=\"true\"></span> $alertMsg
+                    <span class=\"glyphicon glyphicon-$glyphicon\" aria-hidden=\"true\"></span> $msg
                 </div>
             </div>";
 }
