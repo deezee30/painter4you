@@ -181,6 +181,7 @@ function get_ip() {
 
                         <hr class="separator" />
 
+                        <!-- WIP -->
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         <!-- /reviews -->
 
@@ -193,7 +194,7 @@ function get_ip() {
 
                         <div class="row">
                             <div class="col-md-7">
-                                <p>Some stuff here...</p>
+                                <!-- WIP -->
                             </div>
                             <div class="col-md-5 text-center">
                                 <div class="box">
@@ -253,6 +254,8 @@ function get_ip() {
         <?php
         require("components/contactModal.php");
         ?>
+
+        <a href="#top" class="cd-top">Top</a>
 
     </body>
 
