@@ -13,6 +13,7 @@ $contact_enabled    = $config["contact"]["enabled"];
 $contact_email      = $config["contact"]["email"];
 $contact_phone      = $config["contact"]["phone"];
 $media_top          = $config["media"]["top"];
+$media_reviews      = $config["media"]["reviews"];
 
 // unique key to prevent caching
 $key = $dev ? "?$then" : "";
@@ -181,8 +182,7 @@ function get_ip() {
 
                         <hr class="separator" />
 
-                        <!-- WIP -->
-                        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                        <?php require("components/testimonials.php") ?>
                         <!-- /reviews -->
 
                         <!-- contact -->
@@ -193,20 +193,20 @@ function get_ip() {
                         <hr class="separator" />
 
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-xs-7">
                                 <!-- WIP -->
                             </div>
-                            <div class="col-md-5 text-center">
+                            <div class="col-xs-5 text-center">
                                 <div class="box">
                                     <div class="box-content">
                                         <h1 class="tag-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Contact</h1>
                                         <hr class="separator" />
                                         <div class="row">
-                                            <div class="col-md-4" style="text-align: right">
+                                            <div class="col-xs-4" style="text-align: right">
                                                 <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> <b>Phone</b><br />
                                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <b>Email</b>
                                             </div>
-                                            <div class="col-md-5" style="text-align: left">
+                                            <div class="col-xs-5" style="text-align: left">
                                                 <?php echo $contact_phone ?><br />
                                                 <b><a href="mailto:<?php echo $contact_email ?>"><?php echo $contact_email ?></a></b>
                                             </div>
