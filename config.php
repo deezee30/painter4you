@@ -8,7 +8,7 @@ return [
 
     // For developmental purposes. Enables debugging and
     // prevents caching. Do not use in production environment.
-    "dev" => true,
+    "dev" => false,
 
     // Alert message to display on the top of the website.
     // Leave blank to display no message.
