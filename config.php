@@ -8,11 +8,11 @@ return [
 
     // For developmental purposes. Enables debugging and
     // prevents caching. Do not use in production environment.
-    "dev" => false,
+    "dev" => true,
 
     // Alert message to display on the top of the website.
     // Leave blank to display no message.
-    "alert" => "",
+    "alert" => "This website is under development! Stay tuned.",
 
     // The logo to use at the top left corner of the page.
     // Maximum height is 100px
