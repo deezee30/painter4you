@@ -41,10 +41,12 @@
             <div class="col-sm-2" id="leftCol">
                 <!-- sliding nav bar -->
                 <ul class="box nav nav-stacked" id="sidebar">
+                    <li><a href="#top"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> Top</a></li>
                     <li><a href="#services"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Services</a></li>
                     <li><a href="#gallery"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Recent Work</a></li>
                     <li><a href="#reviews"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Reviews</a></li>
-                    <li><a href="#extra"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Extra Info</a></li>
+                    <li><a href="#extra"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Extra Info</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Contact</a></li>
                 </ul>
             </div>
             <!-- /left -->
@@ -57,9 +59,8 @@
                     <h1><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Services <small>What I can do for you</small></h1>
                 </div>
 
-                <hr class="separator" />
-
                 <?php include_once("services.html") ?>
+                <hr class="separator" />
                 <!-- /about -->
 
                 <!-- gallery -->
@@ -67,9 +68,8 @@
                     <h1><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Gallery <small>Some of my previous work</small></h1>
                 </div>
 
-                <hr class="separator" />
-
                 <?php include_once("gallery2.php") ?>
+                <hr class="separator" />
                 <!-- /gallery -->
 
                 <!-- reviews -->
@@ -77,17 +77,14 @@
                     <h1><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Reviews <small>Read what other customers think</small></h1>
                 </div>
 
-                <hr class="separator" />
-
                 <?php include_once("testimonials.php") ?>
+                <hr class="separator" />
                 <!-- /reviews -->
 
                 <!-- extra -->
                 <div class="section" id="extra">
-                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Additional Info <small>Quotes, questions and extra information</small></h1>
+                    <h1><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Additional Info <small>Quotes, questions and extra information</small></h1>
                 </div>
-
-                <hr class="separator" />
 
                 <?php include_once("extra.php") ?>
                 <!-- /extra -->

@@ -14,7 +14,7 @@
     <div class="col-xs-5 text-center">
         <div class="box">
             <div class="box-content">
-                <h1 class="tag-title"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Contact</h1>
+                <h1 class="tag-title"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Contact</h1>
                 <hr class="separator" />
                 <div class="row">
                     <div class="col-xs-4" style="text-align: right">
