@@ -1,26 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Paul's affordable and high quality painting and decorating services are offered here" />
-    <meta name="keywords" content="galway, paint, painter, painting, decorator, decorating, cheap, affordable, high, quality, fast, efficient, gatis, pauls, paul, painterforyou">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <!-- Blueimp gallery CSS -->
-    <link rel="stylesheet" href="css/blueimp-gallery.min.css" />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css<?php echo $key ?>" />
-
-    <title>Painter For You!</title>
-</head>
-<body>
-
 <div class="container-fluid">
 
     <div class="header">
@@ -37,6 +14,7 @@
 
                 <!-- right -->
                 <div class="box col-sm-3" style="margin-top: 15px">
+                    <!-- display contact info -->
                     <dl class="dl-horizontal" style="margin: 5px 0 0 -100px">
                         <dt>Phone</dt>
                         <?php echo "<dd>$contact_phone</dd>" ?>
@@ -50,10 +28,10 @@
     </div>
 
     <!-- alert -->
-    <?php include_once("components/alert.php") ?>
+    <?php include_once("alert.php") ?>
 
     <!-- carousel -->
-    <?php include_once("components/gallery1.php") ?>
+    <?php include_once("gallery1.php") ?>
 
     <!-- main -->
     <div class="container">
@@ -61,11 +39,12 @@
 
             <!-- left -->
             <div class="col-sm-2" id="leftCol">
+                <!-- sliding nav bar -->
                 <ul class="box nav nav-stacked" id="sidebar">
                     <li><a href="#services"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Services</a></li>
                     <li><a href="#gallery"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Recent Work</a></li>
                     <li><a href="#reviews"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Reviews</a></li>
-                    <li><a href="#contact"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Contact</a></li>
+                    <li><a href="#extra"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Extra Info</a></li>
                 </ul>
             </div>
             <!-- /left -->
@@ -80,7 +59,7 @@
 
                 <hr class="separator" />
 
-                <?php include_once("components/services.php") ?>
+                <?php include_once("services.php") ?>
                 <!-- /about -->
 
                 <!-- gallery -->
@@ -90,7 +69,7 @@
 
                 <hr class="separator" />
 
-                <?php include_once("components/gallery2.php") ?>
+                <?php include_once("gallery2.php") ?>
                 <!-- /gallery -->
 
                 <!-- reviews -->
@@ -100,18 +79,18 @@
 
                 <hr class="separator" />
 
-                <?php include_once("components/testimonials.php") ?>
+                <?php include_once("testimonials.php") ?>
                 <!-- /reviews -->
 
-                <!-- contact -->
-                <div class="section" id="contact">
-                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Contact Me <small>For any quotes, questions or information</small></h1>
+                <!-- extra -->
+                <div class="section" id="extra">
+                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Additional Info <small>Quotes, questions and extra information</small></h1>
                 </div>
 
                 <hr class="separator" />
 
-                <?php include_once("components/contact.php") ?>
-                <!-- /contact -->
+                <?php include_once("extra.php") ?>
+                <!-- /extra -->
             </div>
             <!-- /right -->
 
@@ -144,21 +123,8 @@
 </div>
 
 <?php
-include_once("components/contactModal.php");
+include_once("contactModal.php");
 ?>
 
 <!-- Back to top button -->
 <a href="#top" class="cd-top">Top</a>
-
-</body>
-
-<script src="js/jquery-2.2.4.min.js"></script>
-
-<script src="js/blueimp-helper.js"></script>
-<script src="js/blueimp-gallery.min.js"></script>
-<script src="js/jquery.blueimp-gallery.min.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/custom.js"></script>
-
-</html>

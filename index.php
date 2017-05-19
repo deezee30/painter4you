@@ -8,7 +8,7 @@ $config             = require('config.php');
 $dev                = $config['dev'];
 $alert_msg          = $config['alert'];
 $logo               = $config['logo'];
-$alert              = isset($alertmsg) && strlen($alertmsg) > 0;
+$alert              = isset($alert_msg) && strlen($alert_msg) > 0;
 $contact_enabled    = $config['contact']['enabled'];
 $contact_email      = $config['contact']['email'];
 $contact_phone      = $config['contact']['phone'];
@@ -77,5 +77,60 @@ function get_ip() {
         $ip = $_SERVER['REMOTE_ADDR'];
     return $ip;
 }
+?>
 
-include_once('components/main.php');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Paul's affordable and high quality painting and decorating services are offered here" />
+    <meta name="keywords" content="galway, paint, painter, painting, decorator, decorating, cheap, affordable, high, quality, fast, efficient, gatis, pauls, paul, painterforyou">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Blueimp gallery CSS -->
+    <link rel="stylesheet" href="css/blueimp-gallery.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css<?php echo $key ?>" />
+
+    <title>Painter For You!</title>
+</head>
+<body>
+
+<?php
+include_once("components/main.php");
+?>
+
+</body>
+
+<!-- jQuery -->
+<script src="js/jquery-2.2.4.min.js"></script>
+
+<!-- jQuery addons -->
+<script src="js/blueimp-helper.js"></script>
+<script src="js/blueimp-gallery.min.js"></script>
+<script src="js/jquery.blueimp-gallery.min.js"></script>
+
+<!-- Core JS files -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js<?php echo $key ?>"></script>
+
+<!-- Google Analytics -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93481158-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+</html>
