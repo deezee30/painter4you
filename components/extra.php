@@ -1,7 +1,16 @@
 <div class="row">
+    <!-- left -->
     <div class="col-xs-7">
         <!-- WIP -->
+        <div class="box">
+            <div class="box-content">
+                <h4>Work in progress!</h4>
+            </div>
+        </div>
     </div>
+    <!-- /left -->
+
+    <!-- right -->
     <div class="col-xs-5 text-center">
         <div class="box">
             <div class="box-content">
@@ -20,8 +29,10 @@
                 <hr class="separator" />
 
                 <!-- button trigger modal -->
+                <div class="center-block"><h4>Want a quote?</h4></div>
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contactModal">Contact Now</button>
             </div>
         </div>
     </div>
+    <!-- right -->
 </div>
