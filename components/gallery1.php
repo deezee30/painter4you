@@ -12,7 +12,7 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner center-block" role="listbox">
         <?php
         $x = 0;
         foreach ($media_top as $item) {
