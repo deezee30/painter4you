@@ -59,7 +59,7 @@
 
                 <hr class="separator" />
 
-                <?php include_once("services.php") ?>
+                <?php include_once("services.html") ?>
                 <!-- /about -->
 
                 <!-- gallery -->
