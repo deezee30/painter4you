@@ -83,7 +83,7 @@
 
                 <!-- extra -->
                 <div class="section" id="extra">
-                    <h1><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Additional Info <small>Quotes, questions and extra information</small></h1>
+                    <h1><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Additional Info <small>Quotes, questions and extra information</small></h1>
                 </div>
 
                 <?php include_once("extra.php") ?>
