@@ -4,7 +4,7 @@
     <ol class="carousel-indicators">
         <?php
         $x = 0;
-        while ($x < count($media_top)) {
+        while ($x < count(MEDIA_TOP)) {
             echo "<li data-target='#top' data-slide-to='$x'".($x == 0 ? " class='active'" : "")."></li>";
             $x++;
         }
@@ -15,7 +15,7 @@
     <div class="carousel-inner center-block" role="listbox">
         <?php
         $x = 0;
-        foreach ($media_top as $item) {
+        foreach (MEDIA_TOP as $item) {
             $path       = $item["path"] . $key;
             $title      = $item["title"];
             $caption    = $item["caption"];

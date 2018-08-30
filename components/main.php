@@ -7,7 +7,7 @@
                 <!-- left -->
                 <div class="col-sm-8">
                     <a href="/">
-                        <img height=100px src="img/<?php echo $config['logo'] ?>" />
+                        <img height=100px src="img/<?php echo LOGO ?>" />
                     </a>
                 </div>
                 <!-- /left -->
@@ -17,9 +17,9 @@
                     <!-- display contact info -->
                     <dl class="dl-horizontal" style="margin: 5px 0 0 -100px">
                         <dt>Phone</dt>
-						<dd><?php echo $contact_phone ?></dd>
+						<dd><?php echo CONTACT_PHONE ?></dd>
                         <dt>Email</dt>
-						<dd><?php echo "<a href='mailto:$contact_email'>$contact_email</a>" ?></dd>
+						<dd><?php echo "<a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a>" ?></dd>
                     </dl>
                 </div>
                 <!-- /right -->
@@ -97,12 +97,12 @@
         <hr class="separator" />
         <div class="row">
             <div class="col-lg-8">
-                <?php echo "<p>© Copyright - Painter4You.com Ireland | PHONE: $contact_phone | EMAIL: <b><a href='mailto:$contact_email'>$contact_email</a></b></p>" ?>
+                <?php echo "<p>© Copyright - Painter4You.com Ireland | PHONE: ".CONTACT_PHONE." | EMAIL: <b><a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a></b></p>" ?>
             </div>
 
             <?php
             // output the time taken to load the page if debugging is enabled
-            if ($dev) {
+            if (DEV) {
                 $now = microtime(true);
                 $load = round(($now - $then) * 1000);
                 echo "<div class='col-xs-4'>";
@@ -120,7 +120,7 @@
 </div>
 
 <?php
-include_once("contactModal.php");
+include_once("contactModal.html");
 ?>
 
 <!-- Back to top button -->

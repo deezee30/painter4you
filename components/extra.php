@@ -26,8 +26,8 @@
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <b>Email</b>
                     </div>
                     <div class="col-xs-5" style="text-align: left">
-                        <?php echo $contact_phone ?><br />
-                        <b><a href="mailto:<?php echo $contact_email ?>"><?php echo $contact_email ?></a></b>
+                        <?php echo CONTACT_PHONE ?><br />
+                        <b><a href="mailto:<?php echo CONTACT_EMAIL ?>"><?php echo CONTACT_EMAIL ?></a></b>
                     </div>
                 </div>
                 <hr class="separator" />

@@ -1,66 +1,70 @@
 <?php
 
+// PHP error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // start timer
 $then = microtime(true);
 
 // obtain configuration values from config.php
-$config             = require('config.php');
-$dev                = $config['dev'];
-$alert_msg          = $config['alert'];
-$logo               = $config['logo'];
-$alert              = isset($alert_msg) && strlen($alert_msg) > 0;
-$contact_enabled    = $config['contact']['enabled'];
-$contact_email      = $config['contact']['email'];
-$contact_phone      = $config['contact']['phone'];
-$media_top          = $config['media']['top'];
-$media_reviews      = $config['media']['reviews'];
+$config = require('config.php');
+
+define('DEV',               $config['dev']);
+define('ALERT_MSG',         $config['alert']);
+define('LOGO',              $config['logo']);
+define('CONTACT_ENABLED',   $config['contact']['enabled']);
+define('CONTACT_EMAIL',     $config['contact']['email']);
+define('CONTACT_PHONE',     $config['contact']['phone']);
+define('EMAILSERVER_URL',   $config['email_server']['url']);
+define('EMAILSERVER_ID',    $config['email_server']['id']);
+define('EMAILSERVER_KEY',   $config['email_server']['key']);
+define('MEDIA_TOP',         $config['media']['top']);
+define('MEDIA_REVIEWS',     $config['media']['reviews']);
+
+$alert = ALERT_MSG !== null && strlen(ALERT_MSG) > 0;
 
 // unique key to prevent caching
-$key = $dev ? "?$then" : '';
+$key = DEV ? "?$then" : '';
 
 // handle cookies and form submition
 $submit = false;
 $cookies = false;
 $reset = false;
+$error = false;
 
 if (isset($_GET['reset'])) {
     setcookie('submitted', true, $then - 3600);
     $reset = true;
-}
+} else if (isset($_POST['name'])) {
 
-if ($contact_enabled && isset($_POST['name'])) {
+    // compose mail if not spam
+    if (CONTACT_ENABLED && !isset($_COOKIE['submitted'])) {        
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $description = wordwrap(str_replace('\n', '<br />', $_POST['description']), 100, '<br />');
+        $header = "$name's job request";
 
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $description = wordwrap($_POST['description'], 100, '\r\n');
-
-    if (!isset($_COOKIE['submitted'])) {
-        // compose mail
-        $headers = 'MIME-Version: 1.0rn\r\nContent-type: text/html; charset=iso-8859-1rn\r\nFrom: $name';
-        // options to send to cc+bcc
-        // $headers .= "Cc: [email]email@test.com[/email]";
-        // $headers .= "Bcc: [email]email@test.com[/email]";
-
-        ob_start();
-
-        $header = "$name\'s job request";
-        echo "<h1>$header</h1>";
-
-        ?>
+        // body of email
+        $body = "
+        <h1>$header</h1>
         <hr>
-        <b>Name:</b> <?php echo $name ?><br />
-        <b>Phone:</b> <?php echo $phone?><br />
-        <b>Email: <a style="color: #0099FF" href="mailto:<?php echo $email ?>"><?php echo $email ?></a></b><br />
-        <b>Description:</b><br /> <?php echo $description ?>
+        <b>Name:</b> $name<br />
+        <b>Phone:</b> $phone<br />
+        <b>Email: <a style='color: #0099FF' href='mailto:$email'>$email</a></b><br />
+        <b>Description:</b><br />$description
         <hr>
-        <b>Date of creation:</b> <?php echo date('l jS \of F Y \a\t h:i:s A') ?><br />
-        <b>Applicant's IP:</b> <?php echo get_ip() ?>
-        <?php
+        <b>Date of creation:</b> " . date('l jS \of F Y \a\t h:i:s A') . "<br />
+        <b>Applicant's IP:</b> " . get_ip();
 
-        mail($contact_email, $header, ob_get_clean(), $headers);
+        $result = send_email($header, $body, $email, $name);
+        $error = $result == false;
 
-        setcookie('submitted', true, time() + 3600);
+        // if an error ocurred, remove cookies to try again instead of enabling anti spam
+        $time = $error ? $then - 3600 : time() + 3600;
+        setcookie('submitted', true, $time);
     } else {
         $cookies = true;
     }
@@ -76,6 +80,35 @@ function get_ip() {
     else
         $ip = $_SERVER['REMOTE_ADDR'];
     return $ip;
+}
+
+function send_email($header, $body, $from, $from_name) {
+    // organise data to prepare for JSON encoding
+    $data = new stdClass();
+    $data->ServerId = EMAILSERVER_ID;
+    $data->ApiKey   = EMAILSERVER_KEY;
+    $data->Messages = array(array(
+                    'Subject'   => $header,
+                    'To'        => array(array(
+                            'EmailAddress' => CONTACT_EMAIL)),
+                    'From'      => array(
+                            'EmailAddress' => $from,
+                            'FriendlyName' => $from_name),
+                    'HtmlBody'  => $body
+    )); 
+
+    // use cURL to POST the JSON data to SocketLabs
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL,               EMAILSERVER_URL);
+    curl_setopt($ch, CURLOPT_POST,              true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,    true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,        json_encode($data)); 
+    curl_setopt($ch, CURLOPT_HTTPHEADER,        array('Content-Type: application/json')); 
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
 }
 ?>
 

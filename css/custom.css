@@ -27,6 +27,10 @@ body {
     margin-top: 25px;
 }
 
+textarea {
+    white-space: pre-line;
+}
+
 /*
  * Content separators
  */

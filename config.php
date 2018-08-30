@@ -35,6 +35,21 @@ return [
         // The phone number to display on the website as a contact method.
         "phone" => "085 154 8215"
     ],
+	
+    /*
+     * Email server configuration
+     */
+    "email_server" => [
+
+        // URL of injection API server. This server does the processing and sending of email.
+        "url" => "https://inject.socketlabs.com/api/v1/email",
+
+        // The ID of the server.
+        "id" => "20426",
+
+        // The private key of the server.
+        "key" => "Jd8e3WGp45DoBx67ZiXc"
+    ],
 
     /*
      * Media settings

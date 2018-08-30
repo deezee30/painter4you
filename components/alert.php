@@ -6,14 +6,16 @@ if ($reset) {
     if ($cookies) {
         echo buildAlert("danger", "remove-sign", "You have already sent your contact form. You may do this again in 24 hours!");
     } else {
-        if (!$contact_enabled) {
+        if (!CONTACT_ENABLED) {
             echo buildAlert("danger", "remove-sign", "The contact form is currently disabled. Please contact me in some other fashion!");
-        } else {
+        } else if ($error) {
+			echo buildAlert("danger", "remove-sign", "There was an error submitting the form. Please try again.");
+		} else {
             echo buildAlert("success", "ok-sign", "Thanks for contacting, I will get back to you shortly!");
         }
     }
 } else if ($alert) {
-    echo buildAlert("info", "exclamation-sign", $alert_msg);
+    echo buildAlert("info", "exclamation-sign", ALERT_MSG);
 }
 
 function buildAlert($type = "info", $glyphicon = "info-sign", $msg) {
