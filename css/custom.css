@@ -85,10 +85,17 @@ hr.separator {
     margin: 0;
 }
 
+#gallery2 img {
+	max-height: 750px;
+}
+
+#slider {
+    margin: 10px 0 15px 0;
+}
+
 .hide-bullets {
     list-style: none;
     margin-left: -40px;
-    margin-top: 20px;
 }
 
 .hide-bullets .col-xs-3 {
@@ -96,9 +103,12 @@ hr.separator {
 }
 
 .thumbnail {
+	margin-bottom: 10px;
     padding: 0;
     transition: all 0.2s ease;
     border: 2px solid white;
+	/* height: 70px; */
+	overflow: hidden;
 }
 
 .thumbnail:hover {
@@ -161,6 +171,10 @@ hr.separator {
     border-radius: 0 0 2px 2px;
     background-clip: padding-box;
     box-sizing: border-box;
+}
+
+.box-content .row {
+	overflow-y: hidden;
 }
 
 .box-content p {

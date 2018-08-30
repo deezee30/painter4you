@@ -1,5 +1,5 @@
-<!-- Thumbnails: 140x140 pixels -->
-<!-- Photos: Either 1000x750 or 750x1000 pixels -->
+<!-- Thumbnails: 140x140 pixels PNG -->
+<!-- Photos: 1328 x 747 pixels JPG -->
 
 <?php
 $imgcount = 16;
@@ -13,7 +13,7 @@ $imgcount = 16;
             <?php
             $x = 0;
             for ($x = 0; $x < $imgcount; ++$x) {
-                $path = "../img/2/thumbnail/" . ($x + 1) . ".jpg$key";
+                $path = "../img/2/thumbnail/" . ($x + 1) . ".png$key";
 
                 echo "<li class='col-xs-3'>";
                 echo    "<a class='thumbnail' id='carousel-selector-$x'>";
@@ -23,10 +23,8 @@ $imgcount = 16;
             }
             ?>
         </ul>
-
-        <!-- Button trigger modal -->
-        <button onClick="launchGallery()" type="button" class="btn btn-primary btn-lg btn-block">View more</button>
     </div>
+
     <div class="col-xs-7">
         <div class="col-xs-12" id="slider">
 
@@ -62,6 +60,9 @@ $imgcount = 16;
                 </div>
             </div>
         </div>
+
+		<!-- Button trigger modal -->
+        <button onClick="launchGallery()" type="button" class="btn btn-primary btn-lg btn-block">View more</button>
     </div>
 </div>
 

@@ -6,7 +6,7 @@
 
                 <!-- left -->
                 <div class="col-sm-8">
-                    <a href="//painter4you.com">
+                    <a href="/">
                         <img height=100px src="img/<?php echo $config['logo'] ?>" />
                     </a>
                 </div>
@@ -17,9 +17,9 @@
                     <!-- display contact info -->
                     <dl class="dl-horizontal" style="margin: 5px 0 0 -100px">
                         <dt>Phone</dt>
-                        <?php echo "<dd>$contact_phone</dd>" ?>
+						<dd><?php echo $contact_phone ?></dd>
                         <dt>Email</dt>
-                        <?php echo "<dd><a href='mailto:$contact_email'>$contact_email</a></dd>" ?>
+						<dd><?php echo "<a href='mailto:$contact_email'>$contact_email</a>" ?></dd>
                     </dl>
                 </div>
                 <!-- /right -->
@@ -97,7 +97,7 @@
         <hr class="separator" />
         <div class="row">
             <div class="col-lg-8">
-                <?php echo "<p>© Copyright - Painter4You.ie Ireland | PHONE: $contact_phone | EMAIL: <b><a href='mailto:$contact_email'>$contact_email</a></b></p>" ?>
+                <?php echo "<p>© Copyright - Painter4You.com Ireland | PHONE: $contact_phone | EMAIL: <b><a href='mailto:$contact_email'>$contact_email</a></b></p>" ?>
             </div>
 
             <?php

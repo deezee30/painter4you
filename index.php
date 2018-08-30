@@ -33,7 +33,7 @@ if ($contact_enabled && isset($_POST['name'])) {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $description = wordwrap($_POST['description'], 100, "\r\n");
+    $description = wordwrap($_POST['description'], 100, '\r\n');
 
     if (!isset($_COOKIE['submitted'])) {
         // compose mail
@@ -44,7 +44,7 @@ if ($contact_enabled && isset($_POST['name'])) {
 
         ob_start();
 
-        $header = '$name\'s job request';
+        $header = "$name\'s job request";
         echo "<h1>$header</h1>";
 
         ?>
@@ -100,13 +100,11 @@ function get_ip() {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css<?php echo $key ?>" />
 
-    <title>Painter For You!</title>
+    <title>Painter 4 You!</title>
 </head>
 <body>
 
-<?php
-include_once("components/main.php");
-?>
+<?php include_once("components/main.php"); ?>
 
 </body>
 

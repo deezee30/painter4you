@@ -1,18 +1,18 @@
 <?php
 
-// /////////////////////////////////////////////////// //
-// // General configuration file for Painter4You.ie // //
-// /////////////////////////////////////////////////// //
+// //////////////////////////////////////////////////// //
+// // General configuration file for Painter4You.com // //
+// //////////////////////////////////////////////////// //
 
 return [
 
     // For developmental purposes. Enables debugging and
     // prevents caching. Do not use in production environment.
-    "dev" => true,
+    "dev" => false,
 
     // Alert message to display on the top of the website.
     // Leave blank to display no message.
-    "alert" => "This website is under development! Stay tuned.",
+    "alert" => "",
 
     // The logo to use at the top left corner of the page.
     // Maximum height is 100px
@@ -26,13 +26,15 @@ return [
         // Whether or not contacting via POST form is enabled.
         // If disabled, quotes will not be sent to the email,
         // however contact information will still be displayed.
-        "enabled" => true,
+        "enabled" => false,
 
         // The email to display on the website and send the
         // inquiries and contact forms to.
+		// Default: contact@painter4you.com
         "email" => "contact@painter4you.com",
 
         // The phone number to display on the website as a contact method.
+		// Default: 085 154 8215
         "phone" => "085 154 8215"
     ],
 
