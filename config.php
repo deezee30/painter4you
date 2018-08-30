@@ -26,15 +26,13 @@ return [
         // Whether or not contacting via POST form is enabled.
         // If disabled, quotes will not be sent to the email,
         // however contact information will still be displayed.
-        "enabled" => false,
+        "enabled" => true,
 
         // The email to display on the website and send the
         // inquiries and contact forms to.
-		// Default: contact@painter4you.com
         "email" => "contact@painter4you.com",
 
         // The phone number to display on the website as a contact method.
-		// Default: 085 154 8215
         "phone" => "085 154 8215"
     ],
 
