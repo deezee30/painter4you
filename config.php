@@ -1,8 +1,8 @@
 <?php
 
-// //////////////////////////////////////////////////// //
-// // General configuration file for Painter4You.com // //
-// //////////////////////////////////////////////////// //
+// /////////////////////////////////////////////////// //
+// // General configuration file for Painter4You.ie // //
+// /////////////////////////////////////////////////// //
 
 return [
 
@@ -30,7 +30,7 @@ return [
 
         // The email to display on the website and send the
         // inquiries and contact forms to.
-        "email" => "contact@painter4you.com",
+        "email" => "contact@painter4you.ie",
 
         // The phone number to display on the website as a contact method.
         "phone" => "085 154 8215"

@@ -97,7 +97,7 @@
         <hr class="separator" />
         <div class="row">
             <div class="col-lg-8">
-                <?php echo "<p>© Copyright - Painter4You.com Ireland | PHONE: ".CONTACT_PHONE." | EMAIL: <b><a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a></b></p>" ?>
+                <?php echo "<p>© Copyright - Painter4You.ie Ireland | PHONE: ".CONTACT_PHONE." | EMAIL: <b><a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a></b></p>" ?>
             </div>
 
             <?php
