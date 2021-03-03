@@ -104,36 +104,42 @@ jQuery(document).ready(function($) {
             }, scroll_top_duration
         );
     });
+	
+	// set up gallery
+	setupGallery();
 });
 
+var bFinishCheck = false;
+var interval;
+var imgArray = [];
+var i = 0;
+
 function launchGallery() {
+	// only load gallery if images are loaded
+	if (bFinishCheck) {
+		clearInterval(interval);
+		if (i > 0) {
+			var imgUrlArray = [i];
+			for (var count = 0; count < imgArray.length; ++count) {
+				imgUrlArray[count] = imgArray[count].src;
+			}
+
+			blueimp.Gallery(imgUrlArray, {
+				clearSlides: false,
+				preloadRange: 1
+			});
+		}
+	}
+}
+
+function setupGallery() {
 
     var bCheckEnabled = true;
-    var bFinishCheck = false;
-
     var img;
-    var imgArray = [];
-    var i = 0;
 
-    var myInterval = setInterval(loadImage, 1);
+    interval = setInterval(loadImage, 1);
 
     function loadImage() {
-
-        if (bFinishCheck) {
-            clearInterval(myInterval);
-            if (i > 0) {
-                var imgUrlArray = [i];
-                for (var count = 0; count < imgArray.length; ++count) {
-                    imgUrlArray[count] = imgArray[count].src;
-                }
-
-                blueimp.Gallery(imgUrlArray, {
-                    clearSlides: false,
-                    preloadRange: 1
-                });
-            }
-            return;
-        }
 
         if (bCheckEnabled) {
 
@@ -142,7 +148,7 @@ function launchGallery() {
             img = new Image();
             img.onload = fExists;
             img.onerror = fDoesntExist;
-            img.src = '../img/3/' + (i + 1) + '.jpg';
+            img.src = '../img/3/' + (i+1) + '.jpg';
         }
     }
 
