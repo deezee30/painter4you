@@ -11,17 +11,20 @@ $then = microtime(true);
 // obtain configuration values from config.php
 $config = require('config.php');
 
-define('DEV',               $config['dev']);
-define('ALERT_MSG',         $config['alert']);
-define('LOGO',              $config['logo']);
-define('CONTACT_ENABLED',   $config['contact']['enabled']);
-define('CONTACT_EMAIL',     $config['contact']['email']);
-define('CONTACT_PHONE',     $config['contact']['phone']);
-define('EMAILSERVER_URL',   $config['email_server']['url']);
-define('EMAILSERVER_ID',    $config['email_server']['id']);
-define('EMAILSERVER_KEY',   $config['email_server']['key']);
-define('MEDIA_TOP',         $config['media']['top']);
-define('MEDIA_REVIEWS',     $config['media']['reviews']);
+define('DEV',                   $config['dev']);
+define('ALERT_MSG',             $config['alert']);
+define('LOGO',                  $config['logo']);
+define('CONTACT_ENABLED',       $config['contact']['enabled']);
+define('CONTACT_EMAIL',         $config['contact']['email']);
+define('CONTACT_PHONE',         $config['contact']['phone']);
+define('EMAILSERVER_URL',       $config['email_server']['url']);
+define('EMAILSERVER_ID',        $config['email_server']['id']);
+define('EMAILSERVER_KEY',       $config['email_server']['key']);
+define('CAPTCHA_KEY_SITE',      $config['captcha']['site_key']);
+define('CAPTCHA_KEY_SECRET',    $config['captcha']['secret_key']);
+define('ANALYTICS_ID',          $config['analytics']['id']);
+define('MEDIA_TOP',             $config['media']['top']);
+define('MEDIA_REVIEWS',         $config['media']['reviews']);
 
 $alert = ALERT_MSG !== null && strlen(ALERT_MSG) > 0;
 
@@ -33,43 +36,66 @@ $submit = false;
 $cookies = false;
 $reset = false;
 $error = false;
+$captchaFail = false;
 
 if (isset($_GET['reset'])) {
     setcookie('submitted', true, $then - 3600);
     $reset = true;
-} else if (isset($_POST['name'])) {
+} else if (isset($_POST['token'])) {
+    
+    // call curl to POST request
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => CAPTCHA_KEY_SECRET, 'response' => $_POST['token'])));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $arrResponse = json_decode($response, true);
+    
+    // verify the response
+    if($arrResponse["success"] == '1' && $arrResponse["score"] >= 0.5) {
+        // valid submission: compose mail if not spam
+        if (CONTACT_ENABLED && !isset($_COOKIE['submitted'])) {        
+            $name = $_POST['name'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $description = wordwrap(str_replace('\n', '<br />', $_POST['description']), 120, '<br />');
+            $header = "$name's job request";
 
-    // compose mail if not spam
-    if (CONTACT_ENABLED && !isset($_COOKIE['submitted'])) {        
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $description = wordwrap(str_replace('\n', '<br />', $_POST['description']), 100, '<br />');
-        $header = "$name's job request";
+            // body of email
+            $body = "
+            <h1>$header</h1>
+            <hr>
+            <b>Name:</b> $name<br />
+            <b>Phone:</b> $phone<br />
+            <b>Email: <a style='color: #0099FF' href='mailto:$email'>$email</a></b><br />
+            <b>Description:</b><br />$description
+            <hr>
+            <b>Date of creation:</b> " . date('l jS \of F Y \a\t h:i:s A') . "<br />
+            <b>Applicant's IP:</b> " . get_ip();
 
-        // body of email
-        $body = "
-        <h1>$header</h1>
-        <hr>
-        <b>Name:</b> $name<br />
-        <b>Phone:</b> $phone<br />
-        <b>Email: <a style='color: #0099FF' href='mailto:$email'>$email</a></b><br />
-        <b>Description:</b><br />$description
-        <hr>
-        <b>Date of creation:</b> " . date('l jS \of F Y \a\t h:i:s A') . "<br />
-        <b>Applicant's IP:</b> " . get_ip();
+            $result = send_email($header, $body, $email, $name);
+            $error = $result == false;
 
-        $result = send_email($header, $body, $email, $name);
-        $error = $result == false;
-
-        // if an error ocurred, remove cookies to try again instead of enabling anti spam
-        $time = $error ? $then - 3600 : time() + 3600;
-        setcookie('submitted', true, $time);
+            // if an error ocurred, remove cookies to try again instead of enabling anti spam
+            $time = $error ? $then - 3600 : time() + 3600;
+            setcookie('submitted', true, $time);
+        } else {
+            $cookies = true;
+        }
+        
+        $submit = true;
     } else {
-        $cookies = true;
+        // spam submission: notify
+        $error = true;
     }
+}
 
-    $submit = true;
+function console($text) {
+    echo "<script>";
+    echo "console.log(\"$text\");";
+    echo "</script>";
 }
 
 function get_ip() {
@@ -153,15 +179,32 @@ function send_email($header, $body, $from, $from_name) {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/custom.js<?php echo $key ?>"></script>
 
-<!-- Google Analytics -->
+<!-- Google ReCaptcha v3 -->
+<script src="https://www.google.com/recaptcha/api.js?render=<?php echo CAPTCHA_KEY_SITE; ?>"></script>
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    $('#contactModal').submit(function(event) {
+        event.preventDefault();
+          
+        grecaptcha.ready(function() {
+            grecaptcha.execute(<?php echo "\"".CAPTCHA_KEY_SITE."\""; ?>, {action: 'contact'}).then(function(token) {
+                
+                var recaptchaResponse = document.getElementById('token');
+                recaptchaResponse.value = token;
+                
+                $('#contactModal').unbind('submit').submit();
+            });;
+        });
+    });
+</script>
 
-    ga('create', 'UA-93481158-1', 'auto');
-    ga('send', 'pageview');
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo ANALYTICS_ID; ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', <?php echo "\"".ANALYTICS_ID."\""; ?>);
 </script>
 
 </html>

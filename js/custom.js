@@ -109,6 +109,8 @@ jQuery(document).ready(function($) {
 	setupGallery();
 });
 
+// Gallery
+
 var bFinishCheck = false;
 var interval;
 var imgArray = [];

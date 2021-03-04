@@ -45,11 +45,32 @@ return [
         "url" => "https://inject.socketlabs.com/api/v1/email",
 
         // The ID of the server.
-        "id" => "20426",
+        "id" => "xxx",
 
         // The private key of the server.
-        "key" => "Jd8e3WGp45DoBx67ZiXc"
+        "key" => "xxx"
     ],
+	
+	/*
+	 * Google ReCaptcha v3 configuration
+	 */
+	"captcha" => [
+		
+		// Public key
+		"site_key" => "xxx",
+		
+		// Private key
+		"secret_key" => "xxx"
+	],
+	
+	/*
+	 * Google Analytics configuration
+	 */
+	"analytics" => [
+	
+		// Google Analytics ID
+		"id" => "xxx"
+	],
 
     /*
      * Media settings
