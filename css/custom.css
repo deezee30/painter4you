@@ -297,8 +297,8 @@ hr.separator {
     height: 40px;
     width: 40px;
     position: fixed;
-    bottom: 40px;
-    right: 10px;
+    bottom: 10px;
+    left: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     /* image replacement properties */
     overflow: hidden;
@@ -327,7 +327,7 @@ hr.separator {
 }
 @media only screen and (min-width: 768px) {
     .cd-top {
-        right: 20px;
+        left: 20px;
         bottom: 20px;
     }
 }
@@ -335,7 +335,7 @@ hr.separator {
     .cd-top {
         height: 60px;
         width: 60px;
-        right: 30px;
+        left: 30px;
         bottom: 30px;
     }
 }
