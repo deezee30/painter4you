@@ -10,6 +10,8 @@ $then = microtime(true);
 
 // obtain configuration values from config.php
 $config = require('config.php');
+// include util file for handy function use
+include('components/util.php');
 
 define('DEV',                   $config['dev']);
 define('ALERT_MSG',             $config['alert']);
@@ -25,6 +27,16 @@ define('CAPTCHA_KEY_SECRET',    $config['captcha']['secret_key']);
 define('ANALYTICS_ID',          $config['analytics']['id']);
 define('MEDIA_TOP',             $config['media']['top']);
 define('MEDIA_REVIEWS',         $config['media']['reviews']);
+
+// separate email and phone into 3 pieces of data for prevent bot spamming and data collection
+$emailData1 = before("@", CONTACT_EMAIL);
+$emailData2 = between("@", ".", CONTACT_EMAIL);
+$emailData3 = after(".", CONTACT_EMAIL);
+
+$phoneData = explode(" ", CONTACT_PHONE);
+$phoneData1 = $phoneData[0];
+$phoneData2 = $phoneData[1];
+$phoneData3 = $phoneData[2];
 
 $alert = ALERT_MSG !== null && strlen(ALERT_MSG) > 0;
 
@@ -90,22 +102,6 @@ if (isset($_GET['reset'])) {
         // spam submission: notify
         $error = true;
     }
-}
-
-function console($text) {
-    echo "<script>";
-    echo "console.log(\"$text\");";
-    echo "</script>";
-}
-
-function get_ip() {
-    if (!empty($_SERVER['HTTP_CLIENT_IP']))
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else
-        $ip = $_SERVER['REMOTE_ADDR'];
-    return $ip;
 }
 
 function send_email($header, $body, $from, $from_name) {

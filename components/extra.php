@@ -26,8 +26,15 @@
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <b>Email</b>
                     </div>
                     <div class="col-xs-5" style="text-align: left">
-                        <?php echo CONTACT_PHONE ?><br />
-                        <b><a href="mailto:<?php echo CONTACT_EMAIL ?>"><?php echo CONTACT_EMAIL ?></a></b>
+                        <span class="cryptedphone"
+                            data-a="<?php echo $phoneData1 ?>"
+                            data-b="<?php echo $phoneData2 ?>"
+                            data-c="<?php echo $phoneData3 ?>"></span><br />
+                        <b><a href="#" class="cryptedmail"
+                            data-a="<?php echo $emailData1 ?>"
+                            data-b="<?php echo $emailData2 ?>"
+                            data-c="<?php echo $emailData3 ?>"
+                            onclick="window.location.href = 'mailto:' + this.dataset.a + '@' + this.dataset.b + '.' + this.dataset.c; return false;"></a></b>
                     </div>
                 </div>
                 <hr class="separator" />
