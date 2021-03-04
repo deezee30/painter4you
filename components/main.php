@@ -17,9 +17,22 @@
                     <!-- display contact info -->
                     <dl class="dl-horizontal" style="margin: 5px 0 0 -100px">
                         <dt>Phone</dt>
-						<dd><?php echo CONTACT_PHONE ?></dd>
+                        <dd>
+                            <div class="cryptedphone"
+                                data-a="<?php echo $phoneData1 ?>"
+                                data-b="<?php echo $phoneData2 ?>"
+                                data-c="<?php echo $phoneData3 ?>">
+                            </div>
+                        </dd>
                         <dt>Email</dt>
-						<dd><?php echo "<a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a>" ?></dd>
+                        <dd>
+                            <a href="#" class="cryptedmail"
+                                data-a="<?php echo $emailData1 ?>"
+                                data-b="<?php echo $emailData2 ?>"
+                                data-c="<?php echo $emailData3 ?>"
+                                onclick="window.location.href = 'mailto:' + this.dataset.a + '@' + this.dataset.b + '.' + this.dataset.c; return false;">
+                            </a>
+                        </dd>
                     </dl>
                 </div>
                 <!-- /right -->
@@ -97,7 +110,14 @@
         <hr class="separator" />
         <div class="row">
             <div class="col-lg-8">
-                <?php echo "<p>© Copyright - Painter4You.ie Ireland | PHONE: ".CONTACT_PHONE." | EMAIL: <b><a href='mailto:".CONTACT_EMAIL."'>".CONTACT_EMAIL."</a></b></p>" ?>
+                <p>© Copyright 2021 - Painter4You.ie Ireland | PHONE: <span class="cryptedphone"
+                                data-a="<?php echo $phoneData1 ?>"
+                                data-b="<?php echo $phoneData2 ?>"
+                                data-c="<?php echo $phoneData3 ?>"> </span> | EMAIL: <b><a href="#" class="cryptedmail"
+                                data-a="<?php echo $emailData1 ?>"
+                                data-b="<?php echo $emailData2 ?>"
+                                data-c="<?php echo $emailData3 ?>"
+                                onclick="window.location.href = 'mailto:' + this.dataset.a + '@' + this.dataset.b + '.' + this.dataset.c; return false;"></a></b></p>
             </div>
 
             <?php
