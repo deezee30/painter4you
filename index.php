@@ -84,6 +84,7 @@ if (isset($_GET['reset'])) {
             <b>Email: <a style='color: #0099FF' href='mailto:$email'>$email</a></b><br />
             <b>Description:</b><br />$description
             <hr>
+            <b>ReCaptcha v3 Score:</b> " . $arrResponse["score"] . "<br />
             <b>Date of creation:</b> " . date('l jS \of F Y \a\t h:i:s A') . "<br />
             <b>Applicant's IP:</b> " . get_ip();
 
