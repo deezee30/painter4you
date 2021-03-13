@@ -1,3 +1,10 @@
+<?php 
+// Calculate age dynamically
+$then = new DateTime("1973-06-30");
+$now  = new DateTime();
+$y    = $then->diff($now)->y;
+?>
+
 <div class="row">
     <!-- left -->
     <div class="col-xs-7">
@@ -5,7 +12,7 @@
         <div class="box">
             <div class="box-content">
                 <h1 class="text-center"><span class="glyphicon glyphicon-user"></span> About me</h1>
-				<p>Hi! My name is Paul and I am from Latvia. I am 44 years old and I have worked in the painting industry for over 20 years.
+				<p>Hi! My name is Paul and I am from Latvia. I am <?php echo $y ?> years old and I have worked in the painting industry for over 20 years.
 				<br /><br />Before working in Galway, I have professionally used my painting skills in Germany, Switzerland and Denmark for homes and companies!
 				<br><br />I am an honest, organised and responsible individual and I love my job!
 				<br /><br />If you're interested in what I do and would like to get in touch, contact me via phone, email or the form on the website!</p>
